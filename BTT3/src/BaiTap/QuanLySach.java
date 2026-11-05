@@ -6,102 +6,164 @@ public class QuanLySach
 	public static void main (String[] args)
 	{
 		Scanner scanner = new Scanner(System.in);
-		String MaSach, TenSach, TacGia;
-		int NXB, Slg, DonGia,Th_Tien;
-		double Phi_VC, TongTien;
-		System.out.print("- NHAP THONG TIN:\nNhap ma sach: "); //MS001, MS092,...
-		MaSach = scanner.nextLine();
-		System.out.print("Nhap ten sach: ");
-		TenSach = scanner.nextLine();
-		System.out.print("Nhap tac gia: ");
-		TacGia = scanner.nextLine();
-		System.out.print("Nhap nam xuat ban cua sach: ");
-		NXB = scanner.nextInt();
-		System.out.print("Nhap so luong sach: ");
-		Slg = scanner.nextInt();
-		System.out.print("Nhap gia sach: ");
-		DonGia = scanner.nextInt();
-		//Tinh
-		Th_Tien = DonGia*Slg;
-		Phi_VC = 0.05*DonGia;
-		TongTien = Th_Tien + Phi_VC;
-		//In ra
-		System.out.print("\n- THONG TIN SACH:\n+) Ma sach: " + MaSach + "\n+) Ten sach: " + TenSach + "\n+) Ten tac gia: " + TacGia + "\n+) Nam xuat ban: " + NXB + "\n+) So luong con: " + Slg + "\n+) Gia Sach: " + DonGia + "\n+) Thanh Tien: " + Th_Tien + "\n+) Phi Van Chuyen: " + Phi_VC + "\n+) Tong Tien Nhap: " + TongTien);	
 		
-		//Tuan 4
-		System.out.println("\n\nBAI 1:");
-        boolean HopLe = true;
-        if(DonGia <= 0) //Kiem tra DonGia
-        {
-            System.out.println(">Loi: gia sach phai > 0");
-            HopLe = false;
-        }
-        if(Slg < 0) //Kiem tra Slg
-        {
-            System.out.println(">Loi: so luong sach phai >= 0");
-            HopLe = false;
-        }
-        if(NXB > 2026)
-        {
-            System.out.println(">Loi: nam xuat ban cua sach vuot qua nam hien tai");
-            HopLe = false;
-        }
-
-        
-        
-        if (HopLe) 
-        {
-        	System.out.println("Nhap dung");
-        	System.out.println("\n\nBAI 2:");
-            if (DonGia < 50000) 
-            {
-                System.out.println("+) Phan loai: Sach gia thap");
-            } else if (DonGia <= 100000) {
-                System.out.println("+) Phan loai: Sach gia trung binh");
-            } else if (DonGia <= 200000) {
-                System.out.println("+) Phan loai: Sach gia cao");
-            } else {
-                System.out.println("+) Phan loai: Sach gia dac biet");
-            }
-            
-            System.out.println("\n\nBAI 3:");
-            if (Slg == 0) {
-                System.out.println("+)Tinh Trang: Het sach");
-            } else if (Slg >= 1 && Slg <= 5) {
-                System.out.println("+)Tinh Trang: Sap het");
-            } else if (Slg >= 6 && Slg <= 20) {
-                System.out.println("+)Tinh Trang: Con it");
-            } else {
-                System.out.println("+)Tinh Trang: Con nhieu");
-            }
-        } else {
-            System.out.println("> Nhap sai");
-        }
+		int i, N, TongSoLuong;
+		double TongGiaTriSach;
 		
-        System.out.println("\n\nBAI 4:");
-        System.out.println("1. Sach giao khoa");
-        System.out.println("2. Sach tham khao");
-        System.out.println("3. Sach chuyen nganh");
-        System.out.println("4. Sach khac");
-        System.out.print("Chon loai sach (1-4): ");
-        int chon = scanner.nextInt();
-        
-        switch (chon) {
-            case 1:
-                System.out.println(">Da chon sach giao khoa");
-                break;
-            case 2:
-                System.out.println(">Da chon sach tham khao");
-                break;
-            case 3:
-                System.out.println(">Da chon sach chuyen nganh");
-                break;
-            case 4:
-                System.out.println(">Sach khac");
-                break;
-            default:
-                System.out.println(">Chon sai");
-        }
-		scanner.close();
+		System.out.print("Nhập số lượng sách muốn nhập: ");
+		N = scanner.nextInt();
+		scanner.nextLine();
+		String[] MaSach = new String[N];
+		String[] TenSach = new String[N];
+		String[] TacGia = new String[N];
+		int[] Nxb = new int[N];
+		int[] Slg = new int[N];
+		int[] DonGia = new int[N];
+		
+		TongSoLuong = 0;
+		TongGiaTriSach = 0;
+		
+		
+		//BÀI 1-TUẦN 5
+		for (i = 0; i < N; i++) 
+		{
+			System.out.println("\n- NHẬP THÔNG TIN CHO CUỐN SÁCH THỨ " + (i + 1) + ":");
+			System.out.print("Nhập mã sách: ");
+			MaSach[i] = scanner.nextLine();
+			
+			System.out.print("Nhập tên sách: ");
+			TenSach[i] = scanner.nextLine();
+			
+			System.out.print("Nhập tác giả: ");
+			TacGia[i] = scanner.nextLine();
+			
+			boolean HopLe;
+			// Kiểm tra năm xuất bản
+			do 
+			{
+				HopLe = true;
+				System.out.print("Nhập năm xuất bản của sách: ");
+				Nxb[i] = scanner.nextInt();
+				if (Nxb[i] > 2026 || Nxb[i] <= 0) 
+				{
+					System.out.println(">Lỗi: Vượt quá năm hiện tại");
+					HopLe = false;
+				}
+			} while (!HopLe);
+			
+			// Kiểm tra số lượng
+			do 
+			{
+				HopLe = true;
+				System.out.print("Nhập số lượng sách: ");
+				Slg[i] = scanner.nextInt();
+				if (Slg[i] < 0) 
+				{
+					System.out.println(">Lỗi: số lượng sách phải >= 0");
+					HopLe = false;
+				}
+			} while (!HopLe);
+			
+			// Kiểm tra đơn giá
+			do 
+			{
+				HopLe = true;
+				System.out.print("Nhập giá sách: ");
+				DonGia[i] = scanner.nextInt();
+				if (DonGia[i] <= 0) 
+				{
+					System.out.println(">Lỗi: giá sách phải > 0");
+					HopLe = false;
+				}
+			} while (!HopLe);
+			
+			scanner.nextLine();
+			
+			// BÀI 2 - TUẦN 5
+			TongSoLuong = TongSoLuong + Slg[i];
+			TongGiaTriSach = TongGiaTriSach + (double) DonGia[i] * Slg[i];
+		}	
+		
+		// BÀI 3 - TUẦN 5
+				int Chon;
+				do 
+				{
+					System.out.println("\n\n---MENU QUẢN LÝ SÁCH---");
+					System.out.println("1. Hiển thị thông tin tất cả các sách và tính tổng");
+					System.out.println("2. Tìm kiếm sách theo mã sách (Bài 4)");
+					System.out.println("3. Thoát");
+					System.out.print("Chọn số (1->3): ");
+					Chon = scanner.nextInt();
+					scanner.nextLine();
+					
+					switch (Chon) 
+					{
+						case 1:
+							System.out.println("\n- THÔNG TIN CHI TIẾT CÁC SÁCH TRONG THƯ VIỆN:");
+							for (i = 0; i < N; i++) 
+							{
+								int ThTien = DonGia[i] * Slg[i];
+								double PhiVC = 0.05 * DonGia[i];
+								double TongTien = ThTien + PhiVC;
+								
+								System.out.println("\n+) Sách " + (i + 1) + ":");
+								System.out.println("   - Mã sách: " + MaSach[i]);
+								System.out.println("   - Tên sách: " + TenSach[i]);
+								System.out.println("   - Tác giả: " + TacGia[i]);
+								System.out.println("   - Năm xuất bản: " + Nxb[i]);
+								System.out.println("   - Số lượng còn: " + Slg[i]);
+								System.out.println("   - Giá sách: " + DonGia[i]);
+								System.out.println("   - Thành Tiền: " + ThTien);
+								System.out.println("   - Phí Vận Chuyển: " + PhiVC);
+								System.out.println("   - Tổng Tiền Nhập: " + TongTien);
+							}
+							System.out.println("\n-> Tổng số lượng tất cả sách: " + TongSoLuong);
+							System.out.println("-> Tổng giá trị kho sách: " + TongGiaTriSach);
+							break;
+							
+						case 2:
+							// BÀI 4 - TUẦN 5
+							System.out.print("\nNhập mã sách cần tìm: ");
+							String MaCanTim = scanner.nextLine();
+							boolean TimThay = false;
+							
+							for (i = 0; i < N; i++) 
+							{
+								if (MaSach[i].equalsIgnoreCase(MaCanTim)) 
+								{
+									int ThTien = DonGia[i] * Slg[i];
+									double PhiVC = 0.05 * DonGia[i];
+									double TongTien = ThTien + PhiVC;
+									
+									System.out.println("> Đã tìm thấy sách.");
+									System.out.println("+) Mã sách: " + MaSach[i]);
+									System.out.println("+) Tên sách: " + TenSach[i]);
+									System.out.println("+) Tác giả: " + TacGia[i]);
+									System.out.println("+) Năm xuất bản: " + Nxb[i]);
+									System.out.println("+) Số lượng còn: " + Slg[i]);
+									System.out.println("+) Giá Sách: " + DonGia[i]);
+									System.out.println("+) Thành Tiền: " + ThTien);
+									System.out.println("+) Phí Vận Chuyển: " + PhiVC);
+									System.out.println("+) Tổng Tiền Nhập: " + TongTien);
+									TimThay = true;
+									break;
+								}
+							}
+							if (!TimThay) 
+							{
+								System.out.println("> Không tìm thấy sách có mã: " + MaCanTim);
+							}
+							break;
+							
+						case 3:
+							System.out.println("> Đã thoát");
+							break;
+							
+						default:
+							System.out.println("> Chọn sai số");
+					}
+				} while (Chon != 3);
+				
+				scanner.close();
 	}
 }
