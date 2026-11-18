@@ -1,23 +1,88 @@
 package BaiTap;
 
-public class Book {
-	String MaSach;
-	String TieuDe;
-	String TacGia;
-	int NamXuatBan;
-	int SoLuong;
-	
+public class Book 
+{
+	private String MaSach;
+	private String TieuDe;
+	private String TacGia;
+	private int NamXuatBan;
+	private int SoLuong;
+	private int DonGia;
 
-	
-	public Book(String ms, String td, String tg, int nxb, int sl) {
-		this.MaSach = ms;
-		this.TieuDe = td;
-		this.TacGia = tg;
-		this.NamXuatBan = nxb;
-		this.SoLuong = sl;
+	public Book(String ms, String td, String tg, int nxb, int sl, int dg) 
+	{
+		MaSach = ms;
+		TieuDe = td;
+		TacGia = tg;
+		NamXuatBan = nxb;
+		SoLuong = sl;
+		DonGia = dg;
+	}
+
+	public String getMaSach() 
+	{
+		return MaSach;
+	}
+	public void setMaSach(String ms) 
+	{
+		MaSach = ms;
 	}
 	
-	public void HienThiThongTin() {
+	
+	public String getTieuDe() {
+		return TieuDe;
+	}
+	public void setTieuDe(String td) {
+		TieuDe = td;
+	}
+
+	
+	public String getTacGia() {
+		return TacGia;
+	}
+	public void setTacGia(String tg) {
+		TacGia = tg;
+	}
+
+	
+	public int getNamXuatBan() {
+		return NamXuatBan;
+	}
+	public boolean setNamXuatBan(int nxb) 
+	{
+		if (nxb > 2026 || nxb <= 0) 
+		{
+			return false;
+		}
+		NamXuatBan = nxb;
+		return true;
+	}
+
+	
+	public int getSoLuong() {
+		return SoLuong;
+	}
+	public boolean setSoLuong(int sl) {
+		if (sl < 0) {
+			return false;
+		}
+		SoLuong = sl;
+		return true;
+	}
+
+	public int getDonGia() {
+		return DonGia;
+	}
+	public boolean setDonGia(int dg) {
+		if (dg <= 0) {
+			return false;
+		}
+		DonGia = dg;
+		return true;
+	}
+
+	public void HienThiThongTin() 
+	{		
 		System.out.println("Ma Sach: " + MaSach);
 		System.out.println("Tieu De: " + TieuDe);
 		System.out.println("TacGia: " + TacGia);
